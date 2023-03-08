@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import { Inputdo, Listdo } from "./components";
 
-let idcurrent = 4;
-let data = [
-  { text: "Rumah 5 tumbak", id: 1 },
-  { text: "Menikah dengan perempuan jujur dan sholeh", id: 2 },
-  { text: "PC desktop core i5 gen 12 + rtx 3050 setup", id: 3 },
-];
-function App() {
-  const [tasks, setTasks] = useState(data);
-  const add = function (text) {
-    setTasks([...tasks, { text: text, id: idcurrent++ }]);
-  };
+export default function TaskApp() {
+  const [tasks, setTasks] = useState(initialTasks);
+
+  function handleAddTask(text) {
+    setTasks([
+      ...tasks,
+      {
+        id: nextId++,
+        text: text,
+        done: false,
+      },
+    ]);
+  }
+
   return (
     <main className="container mx-auto p-4 sm:px-0">
-      <h1 className="text-xl text-pink-400 font-bold">Pencapaian 2023</h1>
-      <Inputdo add={add} />
-      <Listdo data={tasks} />
+      <h1 className="text-xl text-pink-400 font-bold">Prague itinerary</h1>
+      <Inputdo onAddTask={handleAddTask} />
+      <Listdo tasks={tasks} />
     </main>
   );
 }
 
-export default App;
+let nextId = 3;
+const initialTasks = [
+  { id: 0, text: "Visit Kafka Museum", done: true },
+  { id: 1, text: "Watch a puppet show", done: false },
+  { id: 2, text: "Lennon Wall pic", done: false },
+];

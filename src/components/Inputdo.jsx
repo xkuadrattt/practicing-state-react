@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const Inputdo = (props) => {
+export default function Inputdo({ onAddTask }) {
   const [text, setText] = useState("");
   return (
-    <form className="flex py-8">
+    <form>
       <input
-        value={text}
-        onChange={(e) => {
-          setText(e.target.value);
-        }}
         className="ring-1 p-4 ring-sky-300"
-        placeholder="Tuai harapan Anda"
+        placeholder="Add task"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
       <button
         className="px-4 py-1 ml-4 bg-green-100 rounded-xl"
-        onClick={() => {
-          props.add(text);
+        onClick={(e) => {
+          e.preventDefault();
+          setText("");
+          onAddTask(text);
         }}
       >
         Add
       </button>
     </form>
   );
-};
-
-export default Inputdo;
+}
