@@ -18,7 +18,7 @@ export default function Inputdo({ onAddTask }) {
           onAddTask(text);
         }}
       >
-        Add
+        Aamiin
       </button>
     </form>
   );
